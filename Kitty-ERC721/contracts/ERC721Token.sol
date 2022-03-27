@@ -32,10 +32,30 @@ library Address {
 }
 
 contract ERC721Token is ERC721 {
+    using Address for address;
     mapping(address => uint256) public ownerToTokenCount;
     mapping(uint256 => address) private idToOwner;
     bytes4 internal constant  IDENTIFIER_ERC721 = 0x150b7a02;
+    string public name;
+    string public symbol;
+    string public tokenURIBase;
+    mapping(uint => address) private tokenURIs;
 
+    constructor(string memory _name, string memory _symbol, string memory _tokenURIBase) public {
+        name = _name;
+        symbol = _symbol;
+        tokenURIBase = _tokenURIBase;
+    }
+
+    function _mint(address _owner, uint _tokenId) internal {
+        require(idToOwner[_tokenId] == address(0), "This token already exist");
+        idToOwner[_tokenId] = _owner;
+        ownerToTokenCount[_owner] += 1; 
+    }
+
+    function tokenURI(uint _tokenId) external view returns (string memory) {
+        return string(abi.encodePacked(tokenURIBase,_tokenId));
+    }
     function balanceOf(address _owner) external view returns (uint256) {
         return ownerToTokenCount[_owner];
     }

@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./IERC20.sol";
 
- abstract contract TokenSampleToken is IERC20 {
+contract SampleToken is IERC20 {
     uint256 private _totalSupply;
     //mapping[address] => balances
     mapping(address => uint256) private _balances;
@@ -24,7 +24,7 @@ import "./IERC20.sol";
         return _balances[account];
     }
 
-    function transfer(address to, uint256 amount) public returns (bool) {
+    function transfer(address to, uint256 amount) public override returns (bool) {
         require(_balances[msg.sender] >= amount);
         _balances[msg.sender] -= amount; 
         _balances[to] += amount; 
@@ -40,10 +40,10 @@ import "./IERC20.sol";
         require(_balances[from] >= amount);
         require(_allowances[from][msg.sender] >= amount);
 
-        _balances[msg.sender] -= amount;
+        _balances[from] -= amount;
         _balances[to] += amount;
 
-        emit Transfer(msg.sender, to, amount);
+        emit Transfer(from, to, amount);
         return true;
     }
 
@@ -54,7 +54,7 @@ import "./IERC20.sol";
         return true;
     }
 
-    function allowance(address owner, address spender) external view returns (uint256) {
+    function allowance(address owner, address spender) external view override returns (uint256) {
         return _allowances[owner][spender];
     }
 }
