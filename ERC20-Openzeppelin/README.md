@@ -40,3 +40,10 @@ Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_
 ```shell
 npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 ```
+# Contract addresses:
+Petty deployed to: 0xeC2CEf2F6dBb378702E1ecfC1070C5c0D66cfe64
+Gold deployed to: 0x229168Bc920Db53966286F0B077f682aa229aD65
+TokenSale deployed to: 0x8eA23eEb3a36Ac0233819a6bd4Bb19483Ca1fe70
+Gold deployed to: 0x7e1BCb1fbF1eAbaD9FE0D6efc53a92Ce5Cf83291
+Gold deployed to: 0x70FFa8F313A022f4431475509735065A164A5638
+Gold is payment token? true or false:  true
